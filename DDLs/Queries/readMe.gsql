@@ -1,0 +1,12 @@
+CREATE QUERY readMe() SYNTAX v2 {
+
+PRINT("Run the following scripts in this order:");
+PRINT(" 1. setRelationships - to setup basic relationships - Mother, Father, Son, Daughter");
+PRINT(" 2. setAdvancedRealationships - to setup more advanced relationships - Uncle, Aunt, GrandFather, GrandMother");
+PRINT(" 3. setRoles_subquery - This will add a list to the Person object in which a relationship has been assigend to the person");
+PRINT(" 4. resetRelationships - This script will delete ALL relationships except for the primary relationship hasParent/hasChild");
+PRINT(" 5. deleteParentChildRelationship - This script will delete the primary relationship hasParent / hasChild from the graph");
+PRINT(" 6. displayPersonsByName - Allows you to either lookup a person by their ID or by their First or Lastname");
+PRINT(" 7. displayPersonByRole - Allows you to find all Persons that have been taged with a relationships");
+
+}

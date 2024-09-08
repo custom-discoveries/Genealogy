@@ -1,0 +1,25 @@
+CREATE QUERY edgeAnalytics(STRING vertexId) FOR GRAPH Genealogy_Graph {
+
+  SetAccum<STRING> @@edgeTypes;
+  SetAccum<EDGE> @@edges;
+  MapAccum<STRING,MapAccum<VERTEX, VERTEX>> @@myNeighbors;
+
+  Start = {Person.*};
+
+  myParents = SELEcT tgt2 FROM Start:w - (hasParent>:e) - Person:tgt2  WHERE w.id == vertexId
+  ACCUM @@myNeighbors += (e.type->(tgt2->w));
+
+  myChildern = SELECT tgt1 FROM Start:v - (<hasParent:e) - Person:tgt1  WHERE v.id == vertexId
+  ACCUM @@myNeighbors += (e.type->(tgt1->v));
+
+  PRINT  myParents.size(), myChildern.size(), @@myNeighbors.size();
+
+  FOREACH (k,neighors) IN @@myNeighbors DO
+    PRINT("Edge="+ k);
+    FOREACH (k1,v1) IN neighors DO
+      PRINT(k1, v1);
+    END;
+  END;
+
+  PRINT @@myNeighbors;
+}

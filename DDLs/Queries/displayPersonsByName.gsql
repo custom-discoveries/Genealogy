@@ -1,0 +1,14 @@
+CREATE QUERY displayPersonsByName(STRING name, INT id=0) SYNTAX v2 {
+
+  Start = {Person.*};
+  STRING searchName = "%" + lower(name) + "%";
+  RS = {};
+  
+  IF (name != "") THEN
+    RS = SELECT s FROM Start:s WHERE lower(s.name) LIKE searchName;
+  ELSE IF (id != 0) THEN
+    RS = SELECT s FROM Start:s WHERE s.id == id; 
+  END;
+
+  PRINT RS;
+}

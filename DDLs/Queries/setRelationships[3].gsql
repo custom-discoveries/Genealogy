@@ -1,0 +1,69 @@
+CREATE QUERY setRelationships(BOOL print_stats = FALSE) SYNTAX v2 {
+
+#
+# Run this setup query first
+#
+# Set a more detailed Parental relationship between parent and child.
+# These relationships include
+#   hasFather, hasMother, hasSon, hasDaughter, hasSister, hasBrother
+#
+  Start = {Person.*};
+
+  SetAccum<EDGE> @@Connections;
+#
+#  Find Son of Father
+#
+  R1 = Select c FROM Start:c-(hasParent>:e)-:p WHERE (c.gender == "M" AND p.gender =="M")
+  ACCUM INSERT INTO hasSon VALUES (p.id, c.id), INSERT INTO hasFather VALUES (c.id, p.id), @@Connections += e;
+#
+#  Find Daugher of Father
+#
+  R2 = Select c FROM Start:c-(hasParent>:e)-:p WHERE (c.gender == "F" AND p.gender =="M")
+  ACCUM INSERT INTO hasDaughter VALUES (p.id, c.id), INSERT INTO hasFather VALUES (c.id, p.id), @@Connections += e;
+  R1 = R1 UNION R2;
+#
+# Find Son of Mother
+#
+  R3 = Select c FROM Start:c-(hasParent>:e)-:p WHERE (c.gender == "M" AND p.gender =="F")
+  ACCUM INSERT INTO hasSon VALUES (p.id, c.id), INSERT INTO hasMother VALUES (c.id, p.id), @@Connections += e;
+  R1 = R1 UNION R3;
+#
+#  Find Daughter of Mother
+#
+  R4 = Select c FROM Start:c-(hasParent>:e)-:p WHERE (c.gender == "F" AND p.gender =="F")
+  ACCUM INSERT INTO hasDaughter VALUES (p.id, c.id), INSERT INTO hasMother VALUES (c.id, p.id), @@Connections += e;
+  R1 = R1 UNION R4;
+#
+#  Find all Brothers of a parent
+#
+  R5 = Select c1 FROM Start:c1-(hasParent>:e)-:pt -(hasChild>:ec) - :c2 WHERE (c1.gender == "M" AND c2.gender =="M" and c1.id != c2.id)
+  ACCUM INSERT INTO hasBrother VALUES (c1.id, c2.id), INSERT INTO hasBrother VALUES (c2.id, c1.id);
+  R1 = R1 UNION R5;
+#
+#  Find all Sisters of a parent
+#
+  R6 = Select c1 FROM Start:c1-(hasParent>:e)-:pt -(hasChild>:ec) - :c2 WHERE (c1.gender == "F" AND c2.gender =="F" and c1.id != c2.id)
+  ACCUM INSERT INTO hasSister VALUES (c1.id, c2.id), INSERT INTO hasSister VALUES (c2.id, c1.id);
+  R1 = R1 UNION R6;
+#
+#  Find all Brothers of a Sister
+#
+  R7 = Select c1 FROM Start:c1-(hasParent>:e)-:pt -(hasChild>:ec) - :c2 WHERE (c1.gender == "M" AND c2.gender =="F" and c1.id != c2.id)
+  ACCUM INSERT INTO hasSister VALUES (c1.id, c2.id), INSERT INTO hasBrother VALUES (c2.id, c1.id);
+  R1 = R1 UNION R7;
+#
+#  Find all Sisters of a Brother
+#
+  R8 = Select c1 FROM Start:c1-(hasParent>:e)-:pt -(hasChild>:ec) - :c2 WHERE (c1.gender == "F" AND c2.gender =="M" and c1.id != c2.id)
+  ACCUM INSERT INTO hasBrother VALUES (c1.id, c2.id), INSERT INTO hasSister VALUES (c2.id, c1.id);
+  R1 = R1 UNION R8;
+
+  setRoles_subquery(print_stats);
+
+IF (print_stats) THEN
+  PRINT R1.size();
+  PRINT @@Connections;
+  PRINT R1[R1.name, R1.gender, R1.age];
+END;
+
+}

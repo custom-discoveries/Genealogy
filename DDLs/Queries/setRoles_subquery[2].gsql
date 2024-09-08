@@ -1,0 +1,67 @@
+CREATE QUERY setRoles_subquery(BOOL print_stats = TRUE) SYNTAX v2 {
+/**
+ This query is called by the setRelationships and setAdvancedRelationships Queries
+**/
+
+  Start = {Person.*};
+  DATETIME currentDate;
+  SetAccum<STRING> @roles;
+  SetAccum<EDGE> @@Connections;
+
+  R0 = Select s FROM Start:s
+  POST-ACCUM
+    IF (s.deathdate == currentDate) THEN
+        s.deathdate = now()
+    END,
+    IF (s.birthdate == currentDate) THEN
+        s.birthdate = now()
+    END,
+  s.age = (datetime_diff(s.deathdate,s.birthdate))/31536000;
+
+  R1 = Select s FROM Start:s-(hasFather>:e)-:t WHERE (s.gender == "M" AND t.gender =="M")
+  ACCUM s.@roles += "Son", t.@roles += "Father";
+
+  R2 = Select s FROM Start:s-(hasMother>:e)-:t WHERE (s.gender == "F" AND t.gender =="F")
+  ACCUM s.@roles += "Daughter", t.@roles += "Mother";
+  R1 = R1 UNION R2;
+
+  R3 = Select s FROM Start:s-(hasHusband>:e)-:t WHERE (s.gender == "F")
+  ACCUM s.@roles += "Wife", t.@roles += "Husband";
+  R1 = R1 UNION R3;
+
+  R4 = Select s FROM Start:s-(hasBrother>:e)-:t WHERE (s.gender == "M" AND t.gender =="M" )
+  ACCUM s.@roles += "Brother", t.@roles += "Brother";
+  R1 = R1 UNION R4;
+
+  R5 = Select s FROM Start:s-(hasBrother>:e)-:t WHERE (s.gender == "F" AND t.gender =="M" )
+  ACCUM s.@roles += "Sister", t.@roles += "Brother";
+  R1 = R1 UNION R5;
+
+  R6 = Select s FROM Start:s-(hasSister>:e)-:t WHERE (s.gender == "F" AND t.gender =="F" )
+  ACCUM s.@roles += "Sister", t.@roles += "Sister";
+  R1 = R1 UNION R6;
+
+  R7 = Select s FROM Start:s-(hasSister>:e)-:t WHERE (s.gender == "M" AND t.gender =="F" )
+  ACCUM s.@roles += "Brother", t.@roles += "Sister";
+  R1 = R1 UNION R7;
+
+  R8 = Select s FROM Start:s-(hasGrandFather>:e)-:t WHERE (s.gender == "M" AND t.gender =="M")
+  ACCUM s.@roles += "GrandSon", t.@roles += "GrandFather";
+  R1 = R1 UNION R8;
+
+  R9 = Select s FROM Start:s-(hasGrandMother>:e)-:t WHERE (s.gender == "F" AND t.gender =="F")
+  ACCUM s.@roles += "GrandDaughter", t.@roles += "GrandMother";
+  R1 = R1 UNION R9;
+
+#
+# Update Person's role attribute
+#
+  R0S = Select s From Start:s POST-ACCUM s.roles = s.@roles;
+
+  IF (print_stats) THEN
+    PRINT R0S.size();
+    #PRINT @@Connections;
+    PRINT R0S[R0S.name, R0S.gender, R0S.age, R0S.roles, R0S.@roles];
+  END;
+
+}

@@ -1,0 +1,37 @@
+#
+# Load the Vertex Data for Genealogy_Graph
+#
+Use Graph Genealogy_Graph
+DROP JOB Genealogy_Graph_Load_Data_Job
+CREATE LOADING JOB  Genealogy_Graph_Vertex_Job FOR GRAPH  Genealogy_Graph {
+DEFINE FILENAME DS1 = "./GraphData/Person.csv";
+
+  LOAD DS1 TO VERTEX Person VALUES($0, $2, $3, $4, $5, $6, _) USING SEPARATOR=",", HEADER="true", QUOTE="double", EOL="\n";
+}
+#run the Vertex loading job
+RUN LOADING JOB Genealogy_Graph_Vertex_Job
+
+#drop the job, indicating the job is completed
+DROP JOB Genealogy_Graph_Vertex_Job
+
+#
+# Load the Edge Data for Genealogy_Graph
+#
+DROP JOB Genealogy_Graph_Edge_Job
+CREATE LOADING JOB Genealogy_Graph_Edge_Job FOR GRAPH Genealogy_Graph {
+DEFINE FILENAME DS2 = "./GraphData/hasParent.csv";
+#DEFINE FILENAME DS3 = "./GraphData/hasGrandParent.csv";
+DEFINE FILENAME DS4 = "./GraphData/hasWife.csv";
+
+
+  LOAD DS2 TO EDGE hasParent VALUES ($0, $1) USING SEPARATOR=",", HEADER="true", EOL="\n", QUOTE="double", VERTEX_MUST_EXIST="true";
+  LOAD DS2 TO EDGE hasChild VALUES ($1, $0) USING SEPARATOR=",", HEADER="true", EOL="\n", QUOTE="double", VERTEX_MUST_EXIST="true";
+  LOAD DS4 TO EDGE hasWife VALUES ($0, $1) USING SEPARATOR=",", HEADER="true", EOL="\n", QUOTE="double", VERTEX_MUST_EXIST="true";
+  LOAD DS4 TO EDGE hasHusband VALUES ($1, $0) USING SEPARATOR=",", HEADER="true", EOL="\n", QUOTE="double", VERTEX_MUST_EXIST="true";
+}
+
+#run the Edge loading job
+RUN LOADING JOB Genealogy_Graph_Edge_Job
+
+#drop the job, indicating the job is completed
+DROP JOB Genealogy_Graph_Edge_Job

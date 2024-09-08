@@ -1,0 +1,22 @@
+
+DROP JOB Add_Tag_Job
+USE Graph Genealogy_Graph
+#
+CREATE SCHEMA_CHANGE JOB Add_Tag_Job FOR GRAPH Genealogy_Graph {
+#
+#
+  ADD TAG Father DESCRIPTION "Define Role of Parent that is Male";
+  ADD TAG GrandFather DESCRIPTION "Define Role of Parent Father that is Male";
+  ADD TAG Mother DESCRIPTION "Define Role of Parent that is Female";
+  ADD TAG GrandMother DESCRIPTION "Define Role of Parent Mother is Female";
+  ADD TAG Husband DESCRIPTION "Define Role of Person that is Male in a marriage";
+  ADD TAG Wife DESCRIPTION "Define Role of Person that is Female in a marriage";
+  ADD TAG Daughter DESCRIPTION "Define Role of Person that is a Female child";
+  ADD TAG Son DESCRIPTION "Define Role of Person that is a Male child";
+  ADD TAG Sister DESCRIPTION "Define Role of Person that is a Female Sibling";
+  ADD TAG Brother DESCRIPTION "Define Role of Person that is a Male Sibling";
+  ADD TAG Uncle DESCRIPTION "Define Role of Person that has a Female Relative to the Parent";
+  ADD TAG Aunt DESCRIPTION "Define Role of Person that has a Male Relative to the Parent";
+}
+RUN SCHEMA_CHANGE JOB Add_Tag_Job
+DROP JOB Add_Tag_Job

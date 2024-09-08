@@ -1,0 +1,21 @@
+#
+set exit_on_error = "false"
+DROP JOB Drop_Tag_Job
+USE Graph Genealogy_Graph
+#
+CREATE SCHEMA_CHANGE JOB Drop_Tag_Job FOR GRAPH Genealogy_Graph {
+  DROP TAG Father;
+  DROP TAG GrandFather;
+  DROP TAG Mother;
+  DROP TAG GrandMother;
+  DROP TAG Husband;
+  DROP TAG Wife;
+  DROP TAG Daughter;
+  DROP TAG Son;
+  DROP TAG Sister;
+  DROP TAG Brother;
+  DROP TAG Uncle;
+  DROP TAG Aunt;
+}
+RUN SCHEMA_CHANGE JOB Drop_Tag_Job
+DROP JOB Drop_Tag_Job

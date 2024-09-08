@@ -1,0 +1,14 @@
+CREATE QUERY displayPersonsByRole(STRING roleName) SYNTAX v2 {
+
+  Start = {Person.*};
+  SetAccum<STRING> @roles;
+
+  IF (roleName != "") THEN
+    RS = SELECT s FROM Start:s WHERE roleName IN s.roles;
+  ELSE
+    RS = SELECT s FROM Start:s;
+  END;
+
+  PRINT RS.size();
+  PRINT RS [RS.id, RS.name, RS.gender, RS.age, RS.birthdate, RS.roles];
+}

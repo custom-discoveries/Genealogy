@@ -1,0 +1,35 @@
+#
+set exit_on_error = "false"
+DROP JOB Genealogy_Graph_Schema_Job
+DROP GRAPH Genealogy_Graph
+CREATE GRAPH Genealogy_Graph(*)
+USE Graph Genealogy_Graph
+#
+CREATE SCHEMA_CHANGE JOB Genealogy_Graph_Schema_Job FOR GRAPH Genealogy_Graph {
+
+# Color:#3d7ff2 icon:id(1st)
+  ADD VERTEX Person (PRIMARY_ID id UINT, name STRING, gender STRING, age INT, birthdate DATETIME, deathdate DATETIME, roles SET<STRING>) WITH PRIMARY_ID_AS_ATTRIBUTE="true";
+#
+  ADD DIRECTED EDGE hasParent(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasChild(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasWife(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasHusband(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasSon(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasDaughter(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasGrandParent(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasGrandFather(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasGrandMother(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasGrandSon(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasGrandDaughter(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasBrother(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasSister(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasUncle(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasNephew(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasAunt(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasNiece(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasFather(FROM Person, TO Person);
+  ADD DIRECTED EDGE hasMother(FROM Person, TO Person);
+
+}
+RUN SCHEMA_CHANGE JOB Genealogy_Graph_Schema_Job
+DROP JOB Genealogy_Graph_Schema_Job

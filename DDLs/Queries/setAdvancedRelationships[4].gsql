@@ -1,0 +1,68 @@
+CREATE QUERY setAdvancedRelationships(BOOL print_stats = FALSE) SYNTAX v2 {
+
+#
+# Run this setup query first
+#
+# Set a more detailed Parental relationship between parent and child.
+# These relationships include
+#   hasUncle, hasAunt, hasGrandFather, hasGrandMother
+#
+  Start = {Person.*};
+
+  SetAccum<EDGE> @@Connections;
+#
+#  Find Uncle / Nephew
+#
+  R1 = Select c FROM Start:c-(hasFather>:e1)-:p- (hasBrother>:e2)-:b WHERE (c.gender == "M" AND b.gender =="M")
+  ACCUM INSERT INTO hasUncle VALUES (c.id, b.id), INSERT INTO hasNephew VALUES (b.id, c.id);
+#
+#  Find Aunt / Niece
+#
+  R2 = Select c FROM Start:c-(hasMother>:e1)-:p- (hasSister>:e2)-:s WHERE (c.gender == "F" AND p.gender =="F")
+  ACCUM INSERT INTO hasAunt VALUES (c.id, s.id), INSERT INTO hasNiece VALUES (s.id, c.id);
+  R1 = R1 UNION R2;
+#
+# Find Uncle / Niece
+#
+  R3 = Select c FROM Start:c-(hasFather>:e1)-:p-(hasBrother>:e2)-:b WHERE (c.gender == "F" AND p.gender =="M")
+  ACCUM INSERT INTO hasUncle VALUES (c.id, b.id), INSERT INTO hasNiece VALUES (b.id, c.id);
+  R1 = R1 UNION R3;
+#
+# Find Aunt / Nephew
+#
+  R4 = Select c FROM Start:c-(hasMother>:e1)-:p- (hasSister>:e2)-:s WHERE (c.gender == "M" AND p.gender =="F")
+  ACCUM INSERT INTO hasAunt VALUES (c.id, s.id), INSERT INTO hasNephew VALUES (s.id, c.id);
+  R1 = R1 UNION R4;
+#
+#  Find GrandFather of GrandSon
+#
+  R5 = Select c FROM Start:c-(hasFather>:e)-:pt -(hasFather>:gfc) - :gf WHERE (c.gender == "M" AND gf.gender =="M" and c.id != pt.id and pt.id != gf.id)
+  ACCUM INSERT INTO hasGrandFather VALUES (c.id, gf.id), INSERT INTO hasGrandSon VALUES (gf.id, c.id);
+  R1 = R1 UNION R5;
+#
+#  Find GrandMother of GrandDaughter
+#
+  R6 = Select c FROM Start:c-(hasMother>:e)-:pt -(hasMother>:ec) - :gm WHERE (c.gender == "F" AND gm.gender =="F" and c.id != pt.id and pt.id != gm.id)
+  ACCUM INSERT INTO hasGrandMother VALUES (c.id, gm.id), INSERT INTO hasGrandDaughter VALUES (gm.id, c.id);
+  R1 = R1 UNION R6;
+#
+#  Find GrandMother of GrandSon
+#
+  R7 = Select c FROM Start:c-(hasMother>:e)-:pt -(hasMother>:ec) - :gm WHERE (c.gender == "M" AND gm.gender =="F" and c.id != pt.id and pt.id != gm.id)
+  ACCUM INSERT INTO hasGrandMother VALUES (c.id, gm.id), INSERT INTO hasGrandSon VALUES (gm.id, c.id);
+  R1 = R1 UNION R7;
+#
+#  Find GrandFather of GrandDaughter
+#
+  R8 = Select c FROM Start:c-(hasFather>:e)-:pt -(hasFather>:ec) - :gf WHERE (c.gender == "F" AND gf.gender =="M" and c.id != pt.id and pt.id != gf.id)
+  ACCUM INSERT INTO hasGrandFather VALUES (c.id, gf.id), INSERT INTO hasGrandDaughter VALUES (gf.id, c.id);
+  R1 = R1 UNION R8;
+
+  setRoles_subquery(print_stats);
+
+IF (print_stats) THEN
+  PRINT R1.size();
+  PRINT R1[R1.name, R1.gender, R1.age];
+END;
+
+}

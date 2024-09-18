@@ -20,7 +20,6 @@ DROP JOB Genealogy_Graph_Vertex_Job
 DROP JOB Genealogy_Graph_Edge_Job
 CREATE LOADING JOB Genealogy_Graph_Edge_Job FOR GRAPH Genealogy_Graph {
 DEFINE FILENAME DS2 = "./GraphData/hasParent.csv";
-#DEFINE FILENAME DS3 = "./GraphData/hasGrandParent.csv";
 DEFINE FILENAME DS4 = "./GraphData/hasWife.csv";
 
 

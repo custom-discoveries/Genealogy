@@ -1,5 +1,5 @@
 ## Genealogy
-This is a Tigergraph schema example of the Rockefeller fiamly tree, starting with William Avery Rockefeller Sr.
+This is a Tigergraph schema example of the Rockefeller family tree, starting with William Avery Rockefeller Sr.
 The gsql queries are an example of how to add edges dynamically to a skeleton graph.
 
 Run the query scripts in the following order:

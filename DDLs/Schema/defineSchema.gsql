@@ -1,8 +1,6 @@
 #
 set exit_on_error = "false"
 DROP JOB Genealogy_Graph_Schema_Job
-DROP GRAPH Genealogy_Graph
-CREATE GRAPH Genealogy_Graph(*)
 USE Graph Genealogy_Graph
 #
 CREATE SCHEMA_CHANGE JOB Genealogy_Graph_Schema_Job FOR GRAPH Genealogy_Graph {

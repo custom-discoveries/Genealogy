@@ -1,8 +1,18 @@
 ## Genealogy
-This is a Tigergraph schema example of the Rockefeller fiamly tree, starting with William Avery Rockefeller Sr.
+This is a Tigergraph schema example of the Rockefeller family tree, starting with William Avery Rockefeller Sr.
 The gsql queries are an example of how to add edges dynamically to a skeleton graph.
-
-Run the query scripts in the following order:
+## Install and Run
+### Install
+To install this TigerGraph demo, clone this repository at a terminal command prompt: 
+- \>git clone https://github.com/custom-discoveries/Genealogy.git
+### Run Cheetah in Cloned Directory:
+-  cd Genealogy
+-  Genealogy\> Cheetah [^1]
+    - Select -b option to load both the schema & data
+    - Select -q (sub option -b) to Define and Install the queries
+[^1]: See Cheetah [README.md](https://github.com/custom-discoveries/Cheetah/blob/main/README.md) for installation and setup of Cheetah
+### In TigerGraph GraphStudio:
+Run the query scripts in the following order in TigerGraph GraphStudio Write Queries:
   1. setRelationships - to setup basic relationships - Mother, Father, Son, Daughter
   2. setAdvancedRealationships - to setup more advanced relationships - Uncle, Aunt, GrandFather, GrandMother
   3. setRoles_subquery - This will add a list to the Person object in which a relationship has been assigend to the person

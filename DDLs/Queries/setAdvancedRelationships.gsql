@@ -1,16 +1,17 @@
-#
-# Copyright (c) 2024, Custom Discoveries Inc.
-# All rights reserved.
-#
 CREATE QUERY setAdvancedRelationships(BOOL print_stats = FALSE)  {
+/**
+ Copyright (c) 2024, Custom Discoveries Inc.
+ All rights reserved.
+ **/
 
-#
-# Run this setup query first
-#
-# Set a more detailed Parental relationship between parent and child.
-# These relationships include
-#   hasUncle, hasAunt, hasGrandFather, hasGrandMother
-#
+/**
+ Run this setup query first
+
+ Set a more detailed Parental relationship between parent and child.
+ These relationships include
+   hasUncle, hasAunt, hasGrandFather, hasGrandMother
+**/
+  
   Start = {Person.*};
 
   SetAccum<EDGE> @@Connections;

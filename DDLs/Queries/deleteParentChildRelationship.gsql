@@ -1,5 +1,8 @@
-CREATE QUERY deleteParentChildRelationship (BOOL print_stats = FALSE) SYNTAX v2 {
-
+CREATE QUERY deleteParentChildRelationship (BOOL print_stats = FALSE) {
+/**
+ Copyright (c) 2024, Custom Discoveries Inc.
+ All rights reserved.
+**/
   Start = {Person.*};
 
   SetAccum<EDGE> @@Connections;
@@ -7,7 +10,7 @@ CREATE QUERY deleteParentChildRelationship (BOOL print_stats = FALSE) SYNTAX v2 
   #FILE file1 ("/home/tigergraph/mydata/Genealogy/zzOutput.txt");
   #file1.println((datetime_diff(s.deathdate,s.birthdate))/31536000);
 
-  R1 = Select c FROM Start:c-(hasParent>:e)-:p
+  R1 = Select child FROM Start:child-(hasParent>:e)-:parent
   ACCUM @@Connections += e, DELETE(e);
 
   IF (print_stats) THEN

@@ -1,16 +1,20 @@
 CREATE QUERY edgeAnalytics(INT vertexId) FOR GRAPH Genealogy_Graph {
-
+/**
+ Copyright (c) 2024, Custom Discoveries Inc.
+ All rights reserved.
+**/
+  
   SetAccum<STRING> @@edgeTypes;
   SetAccum<EDGE> @@edges;
   MapAccum<STRING,MapAccum<VERTEX, VERTEX>> @@myFamily;
 
   Start = {Person.*};
 
-  myParents = SELECT tgt2 FROM Start:c - (hasParent>:e) - Person:tgt2  WHERE c.id == vertexId
-  ACCUM @@myFamily += (e.type->(tgt2->c));
+  myParents = SELECT person FROM Start:child - (hasParent>:e) - Person:person  WHERE child.id == vertexId
+  ACCUM @@myFamily += (e.type->(person->child));
 
-  myChildern = SELECT tgt1 FROM Start:v - (<hasParent:e) - Person:tgt1  WHERE v.id == vertexId
-  ACCUM @@myFamily += (e.type->(tgt1->v));
+  myChildern = SELECT person FROM Start:child - (<hasParent:e) - Person:person  WHERE child.id == vertexId
+  ACCUM @@myFamily += (e.type->(person->child));
 
   PRINT  myParents.size(), myChildern.size(), @@myFamily.size();
 

@@ -1,56 +1,60 @@
-CREATE QUERY resetRelationships() SYNTAX v2 {
-
+CREATE QUERY resetRelationships() {
+/**
+ Copyright (c) 2024, Custom Discoveries Inc.
+ All rights reserved.
+**/
+  
   Start = {Person.*};
 
-  #R1 = Select c FROM Start:c-(hasParent>:e)-:p
+  #R1 = SELECT child FROM Start:child-(hasParent>:e)-:parent
   #ACCUM @@Connections += e, DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasFather>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasFather>:e) - :parent
   ACCUM DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasMother>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasMother>:e) - :parent
   ACCUM DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasDaughter>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasDaughter>:e) - :parent
   ACCUM DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasSon>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasSon>:e) - :parent
   ACCUM DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasSister>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasSister>:e) - :parent
   ACCUM DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasBrother>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasBrother>:e) - :parent
   ACCUM DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasFather>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasFather>:e) - :parent
   ACCUM DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasUncle>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasUncle>:e) - :parent
   ACCUM DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasNephew>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasNephew>:e) - :parent
   ACCUM DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasAunt>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasAunt>:e) - :parent
   ACCUM DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasNiece>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasNiece>:e) - :parent
   ACCUM DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasUncle>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasUncle>:e) - :parent
   ACCUM DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasGrandFather>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasGrandFather>:e) - :parent
   ACCUM DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasGrandSon>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasGrandSon>:e) - :parent
   ACCUM DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasGrandMother>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasGrandMother>:e) - :parent
   ACCUM DELETE(e);
 
-  R1 = SELECT c FROM Start:c - (hasGrandDaughter>:e) - :p
+  R1 = SELECT child FROM Start:child - (hasGrandDaughter>:e) - :parent
   ACCUM DELETE(e);
 
   PRINT ["Reset All Relationships..."];

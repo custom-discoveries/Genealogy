@@ -1,5 +1,9 @@
 CREATE QUERY readMe() SYNTAX v2 {
-
+/**
+ Copyright (c) 2024, Custom Discoveries Inc.
+ All rights reserved.
+**/
+  
 PRINT("Run the following scripts in this order:");
 PRINT(" 1. setRelationships - to setup basic relationships - Mother, Father, Son, Daughter");
 PRINT(" 2. setAdvancedRealationships - to setup more advanced relationships - Uncle, Aunt, GrandFather, GrandMother");

@@ -1,4 +1,7 @@
 #
+# Copyright (c) 2024, Custom Discoveries Inc.
+# All rights reserved.
+#
 set exit_on_error = "false"
 DROP JOB Genealogy_Graph_Schema_Job
 USE Graph Genealogy_Graph

@@ -1,9 +1,8 @@
-#
-# Copyright (c) 2024, Custom Discoveries Inc.
-# All rights reserved.
-#
-CREATE QUERY setRoles_subquery(BOOL print_stats = TRUE) SYNTAX v2 {
+CREATE QUERY setRoles_subquery(BOOL print_stats = TRUE) {
 /**
+ Copyright (c) 2024, Custom Discoveries Inc.
+ All rights reserved.
+
  This query is called by the setRelationships and setAdvancedRelationships Queries
 **/
 

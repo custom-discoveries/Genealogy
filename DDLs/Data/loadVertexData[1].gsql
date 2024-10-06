@@ -1,0 +1,19 @@
+#
+# Copyright (c) 2024, Custom Discoveries Inc.
+# All rights reserved.
+#
+#
+# Load the Vertex Data for Genealogy_Graph
+#
+Use Graph Genealogy_Graph
+DROP JOB Genealogy_Graph_Load_Data_Job
+CREATE LOADING JOB  Genealogy_Graph_Vertex_Job FOR GRAPH  Genealogy_Graph {
+DEFINE FILENAME DS1 = "./GraphData/Person.csv";
+
+  LOAD DS1 TO VERTEX Person VALUES($0, $2, $3, $4, $5, $6, _) USING SEPARATOR=",", HEADER="true", QUOTE="double", EOL="\n";
+}
+#run the Vertex loading job
+RUN LOADING JOB Genealogy_Graph_Vertex_Job
+
+#drop the job, indicating the job is completed
+DROP JOB Genealogy_Graph_Vertex_Job

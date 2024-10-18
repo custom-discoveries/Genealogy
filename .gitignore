@@ -3,6 +3,6 @@
 .vscode/*
 src/__pycache__/*
 Downloads/*
-remoteAdminConfig.txt
-localAdminConfig.txt
+remoteAdminConfig.*
+localAdminConfig.*
 Outputs

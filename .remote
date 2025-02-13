@@ -1,0 +1,21 @@
+projectDir=/Users/mitchd/Documents/TigerGraph-Projects/Genealogy
+secret=b'gAAAAABnp48THFT7mQNRtzhqcdW8R1DD3TGWLA0RyLE78Ys1LTwoEdfwsrsGY1dax8VjekQFH2tE_jL54TPINaX_j9jyubdiVRR-T03X744-gggPBuRSHUOglbpaLFhxEV8hxQL9CEfk'
+token="b'gAAAAABnp48Uxn-IlA2cdvBa8fC_7zHzZyaXd3-U2_yS1atlmy9ta-HmOsseHTJBPTbLC4QPeUIov4sNTaIIlWvpqEi-lH5iz-a-zL89uvAB4g35sH_sCQO56080ShvZlssPx7lexFUVJeHbHjjf_c2xCNrZIN2SCc-NcBgeqcduYH1bUQuhQ0Z7cLlROG1HGylUWU3CZJ0K0IOCBNvx2VbKZaGA4l7_9hM6ZyQAQPqOvkZlz5pVEFWn53iXpbRCKBDOj6VXQAfa6oKxROscGfw751PSO40vhWAdyGv2K7fJuutPEVEGcXvL37jaXQHT3ZIOeq18IUyoS-BGhuYOvyT47i7cs44icQ=='"
+graphName=Genealogy_Graph
+splitMaxFileSize=100000000
+splitMaxLines=80000
+version=4.1.2
+projectConfigDir=Cheetah/bin/templates/
+displayFormat=terminal
+DDLdir=DDLs/
+ddlDataPath=Data/
+ddlQueryPath=Queries/
+ddlSchemaPath=Schema/
+licDir=License/
+dataDir=GraphData/
+outputDir=Outputs/
+remoteServer=True
+username="b'gAAAAABnrSTmsWexTmDqbNm40fv0_W1pUZxG9CfPS1YJ32_gHOwVBglSjxalLB2kBpKe76yyjzxxbIbdA26alEGu4ODGr0cw5Q=='"
+password="b'gAAAAABnrSTyXvnuXDwgoitR7qWywTsu9H6uTSq8d57f5WNcYcGFWarN6OU4kU5LxzQLs-0nKkxK9HmkP6-xRCvP_9Qy07TFhw=='"
+host=https://tg-d6e95686-a026-4cc4-b6e5-6962b6790987.tg-2635877100.i.tgcloud.io
+tokenExpirationDate=2025-03-10 17:06:28

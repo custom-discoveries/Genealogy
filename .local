@@ -1,0 +1,20 @@
+projectDir=/home/tigergraph/mydata/Genealogy
+secret=b'gAAAAABnrSdrCJyveKw3qdix-ONgP8N4_xpolG8bFSv8Roo8FDUtAXsO_BiSjUiBa1OHWXJfZfypKvo67bi2pReweJQgD0KV5jFp-8WzbJreRqoJbJNTjMzHKiQIr456DHSNC55zvdkj'
+token="b'gAAAAABnrSdrOf5j2DxyAxcPYd4IOlyojIxWj5WJV2MLHmZcIBqR6qF60jOhzX1E0FBoo9F6R0d_OOQ0rd5CZ9pWkLbJ5uxh8nzxk1hD0OzxMdqMBNnpC70Amk4oLfSdUEXMDg5yAzWNZCQHn3KJ3zApJLFfZfeypFenQMJrKmnuXRtPdMNwEcx2G19qCxTbzzUFJtWs96_rBKDzorSKFiuSccYJXSgP-rw28BuJTrZ8bcGGahxEiqkJcLyXfuWCQ3NOJE-mFmXho2U1bVwXZulVc9rF8oid5HWyPe6hEcZcYRkyZvRiJbkkRvRbxMMcjNMyed8TyEXm7euROJkC9TK7GGxY0e3aNQ=='"
+graphName=Genealogy_Graph
+splitMaxFileSize=
+splitMaxLines=
+version=4.1.2
+projectConfigDir=Cheetah/bin/templates/
+DDLdir=DDLs/
+ddlDataPath=Data/
+ddlQueryPath=Queries/
+ddlSchemaPath=Schema/
+licDir=License/
+dataDir=GraphData/
+outputDir=Outputs/
+remoteServer=False
+username="b'gAAAAABnrSdOENQbBqVH6ub2AdG2Bm3qW9UhAsHEFIzEPl66k907tvuiAVRNoIvYHGRE7HkK1XJuwkSETqqllvfzeoHStOYolg=='"
+password="b'gAAAAABnrSdaFM-Y77O3l6WZiCl4VYfoUuO0cnBPX0lGJHyZZw3Hf7I_0QVEcqRfeYAERt8SsAlKNuKtvvyjiTM-15yrOxwYSQ=='"
+host=http://localhost
+tokenExpirationDate=2025-03-14 22:57:47

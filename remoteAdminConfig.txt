@@ -1,0 +1,20 @@
+secret,b'gAAAAABnbtNbvMqmT3wnF480j8QZoWR-j-88wNG6cwBt_C3jP71odugOdPVAgC1qeGUXOFbi8EEREhEfpgLjRzgjS1kLeEPfHV4pBt9H-niEkKpgHO17jHLU2wK4iOyXYjSAJShLaOLm'
+token,b'gAAAAABnbtNbdNYNrQrWvK5C539yy-ExZkxFdQlyBwNTJj9Y-bZg67COYWm2MW1vFk0mvtTUkcWFWZVx_zZsoKpwG2Puvplx2_DkJ1FE4FBg9F-YqEnrWKa9Np295-_Zbqr-utL_BN5zf2jdruW8BaQTM9Q5buOSlEAAHqGZW4ZaRs-gAJHJAD5WEfuwughmrWI8nt3p7l8g1hcV6FL2owjUWjhOedpjvdjuLOX2mbIMF_vhCgsYLvE2gdl8L4TwtmRXmo8JxjuuhzNoqvgASnldrQ0G8KdY7egi8rMSl7w65pLr_n-k7VkpcgpYs2qTUZVFSw41qqbHY74D2esVuKfX257NA11nBA=='
+graphName,Genealogy_Graph
+splitMaxFileSize,100000000
+splitMaxLines,85000
+version,4.1.2
+projectConfigDir,Cheetah/bin/templates/
+DDLdir,DDLs/
+ddlDataPath,Data/
+ddlQueryPath,Queries/
+ddlSchemaPath,Schema/
+licDir,License/
+dataDir,GraphData/
+remoteServer,True
+projectDir,/Users/mitchd/Documents/TigerGraph-Projects/Genealogy
+apiKey,nJiB1ITsXmLbVVNL
+username,b'gAAAAABnbfOjjlGfaiPrp2rq679MNvTqNNwmapKOSta04btQKc_FszxcXj_SccIYWjZxpZ4BHVJC4h-0vd602Nu0lw83mFFVuw=='
+password,b'gAAAAABnbfOwFNze7ScuQFIJRzlov6k2NBvOmcylimggyiSrNBfCaCJLAvbSZnUS99DfeJzKuN_4uxiYt1w-LKXtr2fQovHBIA=='
+host,https://tg-d6e95686-a026-4cc4-b6e5-6962b6790987.tg-2635877100.i.tgcloud.io
+tokenExpirationDate,2025-01-03 16:18:35

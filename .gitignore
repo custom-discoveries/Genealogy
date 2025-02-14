@@ -2,7 +2,10 @@
 .DS_Store
 .vscode/*
 src/__pycache__/*
+DDLs/*/*.bak
 Downloads/*
-.remote.*
-.local.*
+remoteAdminConfig.txt
+localAdminConfig.txt
+.remote
+.local
 Outputs
